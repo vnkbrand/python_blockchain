@@ -6,16 +6,22 @@ class Blockchain:
     Implemented as a list of blocks and are data sets of txn's
     """
     def __init__(self):
-        self.chain = []
+        self.chain = [Block.genesis()]
 
     def add_block(self, data):
-        self.chain.append(Block(data))
+
+        self.chain.append(Block.mine_block(self.chain[-1], data))
 
     def __repr__(self):
         return f'Blockchain: {self.chain}'
 
-blockchain = Blockchain()
-blockchain.add_block('one')
-blockchain.add_block('two')
+def main():
+    blockchain = Blockchain()
+    blockchain.add_block('one')
+    blockchain.add_block('two')
 
-print(blockchain)
+    print(blockchain)
+    print(f'blockchain.py__name__: {__name__}')
+
+if __name__ == '__main__':
+    main()
